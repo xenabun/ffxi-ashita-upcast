@@ -230,6 +230,7 @@ ashita.events.register('command', 'command_cb', function (e)
     local in_cooldown = false  -- Choose the matching spell even if it's in cooldown, rather than skipping down one.
     local show_recast = false  -- Send /recast <spell> in addition to (trying to) cast it.
     local recast_only = false  -- /recast only, don't actually try to cast.
+	local skip_mana = false
     local ability_name = nil   -- Original spell/ability name.
     local ability_family = nil -- Spell/ability family (really ability_name lowercased)
     local target = nil         -- Intended spell target.
@@ -250,6 +251,8 @@ ashita.events.register('command', 'command_cb', function (e)
                     print(chat.header('Upcast') .. chat.error("Unexpected option '" .. arg .. "'"))
                     return
                 end
+			elseif arg_lower == 'mp' then
+				skip_mana = true
             else  -- Unknown argument, so hopefully it's the spell name.  This is the end of any and all options
                 ability_name = arg
                 ability_family = arg_lower
@@ -312,7 +315,7 @@ ashita.events.register('command', 'command_cb', function (e)
                 goto continue
             end
 
-			if currentMP ~= nil and resource.ManaCost > currentMP then
+			if skip_mana == true and currentMP ~= nil and resource.ManaCost > currentMP then
 				debug('not enough mp')
 				goto continue
 			end
