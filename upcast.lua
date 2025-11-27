@@ -194,6 +194,16 @@ ashita.events.register('command', 'command_cb', function (e)
     e.blocked = true
     local mm = AshitaCore:GetMemoryManager()
     local player = mm:GetPlayer()
+	
+	-- local currentMana = player.GetManaMax() * player.GetManaPercent()
+	-- AshitaCore:GetChatManager():QueueCommand(1, "/echo " .. currentMana)
+	local ashitaParty = AshitaCore:GetMemoryManager():GetParty()
+	local currentMP = nil
+	if ashitaParty ~= nil then
+		currentMP = ashitaParty:GetMemberMP(0)
+		-- AshitaCore:GetChatManager():QueueCommand(1, "/echo currentMP=" .. currentMP)
+	end
+
     local recast = mm:GetRecast()
     local resources = AshitaCore:GetResourceManager()
 
@@ -278,6 +288,11 @@ ashita.events.register('command', 'command_cb', function (e)
             end
 
             local resource = handler.getById(id)
+			-- do
+			-- 	ablname = resource and resource.Name[1] or ability_name
+			-- 	AshitaCore:GetChatManager():QueueCommand(1, "/echo looking through ability=" .. ablname .. " with mana cost=" .. resource.ManaCost)
+			-- end
+			
             -- Are they high enough level?
             if not handler.checkLevel(resource) then
                 debug("checkLevel failed")
@@ -296,6 +311,11 @@ ashita.events.register('command', 'command_cb', function (e)
                 debug("in cooldown")
                 goto continue
             end
+
+			if currentMP ~= nil and resource.ManaCost > currentMP then
+				debug('not enough mp')
+				goto continue
+			end
 
             final_ability = resource
             debug("Final ability name: " .. final_ability.Name[1])
