@@ -1,3 +1,8 @@
+# THIS IS A FORK
+
+This is a modification of FFXI addon made by **dewiniaid**
+Link to original addon: https://github.com/dewiniaid/ffxi-ashita-upcast
+
 # Upcast
 
 Upcast is an Ashita4 addon that can automatically upscale spells and Dancer job abilities based off of your current 
