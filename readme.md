@@ -1,7 +1,8 @@
 # THIS IS A FORK
 
 This is a modification of FFXI addon made by **dewiniaid**<br />
-Link to original addon: https://github.com/dewiniaid/ffxi-ashita-upcast
+Link to original addon: https://github.com/dewiniaid/ffxi-ashita-upcast<br /><br />
+The modification adds `mp` option that skips tiers on insufficient mana
 
 # Upcast
 
