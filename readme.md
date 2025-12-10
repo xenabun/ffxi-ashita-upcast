@@ -1,6 +1,6 @@
 # THIS IS A FORK
 
-This is a modification of FFXI addon made by **dewiniaid**
+This is a modification of FFXI addon made by **dewiniaid**<br />
 Link to original addon: https://github.com/dewiniaid/ffxi-ashita-upcast
 
 # Upcast
